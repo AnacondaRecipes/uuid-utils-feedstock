@@ -44,6 +44,7 @@ about:
     Python UUID implementation using Rust's UUID library. 
     This will make uuid4 function around 10x faster.
   dev_url: https://github.com/aminalaee/uuid-utils
+  doc_url: https://aminalaee.dev/uuid-utils/
   license: BSD-3-Clause
   license_file: LICENSE.md
   license_family: BSD

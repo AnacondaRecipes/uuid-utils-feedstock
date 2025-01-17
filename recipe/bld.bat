@@ -16,4 +16,4 @@ chcp 65001
 set PYTHONUTF8=1
 set PYTHONIOENCODING="UTF-8"
 set TMPDIR=tmpbuild_%PY_VER%
-FOR %%w in (*.whl) DO %PYTHON% -m pip install %%w --no-clean
+FOR %%w in (*.whl) DO %PYTHON% -m pip install --no-deps --no-build-isolation %%w --no-clean

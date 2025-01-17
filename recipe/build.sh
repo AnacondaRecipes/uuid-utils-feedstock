@@ -15,4 +15,4 @@ maturin build --release -i $PYTHON
 cd target/wheels
 
 # Install wheel manually
-$PYTHON -m pip install *.whl
+$PYTHON -m pip install --no-deps --no-build-isolation *.whl

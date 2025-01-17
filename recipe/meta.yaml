@@ -11,6 +11,8 @@ source:
 
 build:
   number: 0
+  missing_dso_whitelist:
+  - $RPATH/ld64.so.1  # [s390x]
 
 requirements:
   build:

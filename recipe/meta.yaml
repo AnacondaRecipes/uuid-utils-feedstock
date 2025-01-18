@@ -13,6 +13,9 @@ build:
   number: 0
   missing_dso_whitelist:
   - $RPATH/ld64.so.1  # [s390x]
+  script:
+    - cargo-bundle-licenses --format yaml --output ./THIRDPARTY.yml
+    - {{ PYTHON }} -m pip install . --no-deps --no-build-isolation
 
 requirements:
   build:
@@ -48,7 +51,9 @@ about:
   dev_url: https://github.com/aminalaee/uuid-utils
   doc_url: https://aminalaee.dev/uuid-utils/
   license: BSD-3-Clause
-  license_file: LICENSE.md
+  license_file: 
+    - LICENSE.md
+    - THIRDPARTY.yml
   license_family: BSD
 
 extra:

@@ -11,14 +11,16 @@ source:
 
 build:
   number: 0
+  skip: true  # [py<39]
+  missing_dso_whitelist:
+  - $RPATH/ld64.so.1  # [s390x]
+  script:
+    - cargo-bundle-licenses --format yaml --output ./THIRDPARTY.yml
+    - {{ PYTHON }} -m pip install . --no-deps --no-build-isolation
 
 requirements:
   build:
-    - python                                 # [build_platform != target_platform]
-    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
-    - maturin                                # [build_platform != target_platform]
     - {{ compiler('c') }}
-    - {{ stdlib('c') }}
     - {{ compiler('cxx') }}
     - {{ compiler('rust') }}
     - cargo-bundle-licenses
@@ -30,21 +32,30 @@ requirements:
     - python
 
 test:
+  source_files:
+    - tests
   imports:
     - uuid_utils
   commands:
     - pip check
+    - pytest
   requires:
     - pip
+    - pytest
 
 about:
   home: https://github.com/aminalaee/uuid-utils
   summary: Drop-in replacement for Python UUID in Rust
+  description: |
+    Python UUID implementation using Rust's UUID library. 
+    This will make uuid4 function around 10x faster.
   dev_url: https://github.com/aminalaee/uuid-utils
+  doc_url: https://aminalaee.dev/uuid-utils/
   license: BSD-3-Clause
-  license_file:
+  license_file: 
     - LICENSE.md
     - THIRDPARTY.yml
+  license_family: BSD
 
 extra:
   recipe-maintainers:

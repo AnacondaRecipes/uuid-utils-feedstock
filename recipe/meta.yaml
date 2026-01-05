@@ -1,5 +1,5 @@
 {% set name = "uuid-utils" %}
-{% set version = "0.10.0" %}
+{% set version = "0.12.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,21 +7,19 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/uuid_utils-{{ version }}.tar.gz
-  sha256: 5db0e1890e8f008657ffe6ded4d9459af724ab114cfe82af1557c87545301539
+  sha256: 252bd3d311b5d6b7f5dfce7a5857e27bb4458f222586bb439463231e5a9cbd64
 
 build:
   number: 0
   skip: true  # [py<39]
-  missing_dso_whitelist:
-  - $RPATH/ld64.so.1  # [s390x]
   script:
     - cargo-bundle-licenses --format yaml --output ./THIRDPARTY.yml
     - {{ PYTHON }} -m pip install . --no-deps --no-build-isolation
 
 requirements:
   build:
+    - {{ stdlib('c') }}
     - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
     - {{ compiler('rust') }}
     - cargo-bundle-licenses
   host:

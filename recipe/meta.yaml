@@ -34,14 +34,15 @@ test:
     - tests
   imports:
     - uuid_utils
-  commands:
-    - pip check
-    - pytest
   requires:
     - pip
-    - pytest # [not osx]
+    - pytest
+  commands:
+    - pip check
+    - pytest -v # [not osx]
     # test_getnode is marked as xfail on linux but it seems doesn't work on macOS too.
-    - pytest -k "not test_getnode"  # [osx]
+    - pytest -v -k "not test_getnode"  # [osx]
+
 
 about:
   home: https://github.com/aminalaee/uuid-utils

@@ -1,5 +1,5 @@
 {% set name = "uuid-utils" %}
-{% set version = "0.12.0" %}
+{% set version = "0.17.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,11 +7,11 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/uuid_utils-{{ version }}.tar.gz
-  sha256: 252bd3d311b5d6b7f5dfce7a5857e27bb4458f222586bb439463231e5a9cbd64
+  sha256: abb5667a36119019b3fa320c4d10c21ebccfcc87c8a739e6a0056cee7f48dde2
 
 build:
   number: 0
-  skip: true  # [py<39]
+  skip: true  # [py<310]
   script:
     - cargo-bundle-licenses --format yaml --output ./THIRDPARTY.yml
     - {{ PYTHON }} -m pip install . --no-deps --no-build-isolation
@@ -39,21 +39,20 @@ test:
     - pytest
   commands:
     - pip check
-    - pytest -v # [not osx]
+    - pytest -v  # [not osx]
     # test_getnode is marked as xfail on linux but it seems doesn't work on macOS too.
     - pytest -v -k "not test_getnode"  # [osx]
-
 
 about:
   home: https://github.com/aminalaee/uuid-utils
   summary: Drop-in replacement for Python UUID in Rust
   description: |
-    Python UUID implementation using Rust's UUID library. 
+    Python UUID implementation using Rust's UUID library.
     This will make uuid4 function around 10x faster.
   dev_url: https://github.com/aminalaee/uuid-utils
   doc_url: https://aminalaee.dev/uuid-utils/
   license: BSD-3-Clause
-  license_file: 
+  license_file:
     - LICENSE.md
     - THIRDPARTY.yml
   license_family: BSD

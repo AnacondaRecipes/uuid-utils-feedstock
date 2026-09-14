@@ -34,6 +34,7 @@ test:
     - tests
   imports:
     - uuid_utils
+    - uuid_utils.compat
   requires:
     - pip
     - pytest
